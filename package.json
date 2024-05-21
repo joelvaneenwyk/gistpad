@@ -19,7 +19,7 @@
   "homepage": "https://github.com/lostintangent/gistpad#readme",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.75.0"
+    "vscode": "^2.26.1"
   },
   "categories": [
     "Other"
@@ -1500,38 +1500,40 @@
     "watch": "webpack --mode development --watch --progress"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^1.7.2",
     "base64-to-uint8array": "^1.0.0",
     "diff-match-patch": "^1.0.5",
     "gists": "github:lostintangent/gists",
     "github-base": "^1.0.0",
     "https-browserify": "^1.0.0",
-    "is-binary-path": "^2.1.0",
-    "markdown-it": "^10.0.0",
+    "is-binary-path": "^3.0.0",
+    "markdown-it": "^14.1.0",
     "markdown-it-regex": "^0.2.0",
-    "mobx": "^5.14.2",
-    "moment": "^2.24.0",
+    "mobx": "^6.12.3",
+    "moment": "^2.30.1",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
     "querystring-es3": "^0.2.1",
-    "rxjs": "^6.5.4",
-    "simple-git": "^1.126.0",
+    "rxjs": "^7.8.1",
+    "simple-git": "^3.24.0",
     "stream-http": "^3.2.0",
-    "title-case": "^3.0.2",
+    "title-case": "^4.3.1",
     "url": "^0.11.3",
-    "util": "^0.12.5"
-  },
-  "devDependencies": {
+    "util": "^0.12.5",
     "@types/moment": "^2.13.0",
-    "@types/node": "^8.10.25",
-    "@types/vscode": "^1.75.0",
-    "copy-webpack-plugin": "^5.0.5",
+    "@types/node": "^20.12.12",
+    "@types/vscode": "^1.89.0",
+    "copy-webpack-plugin": "^12.0.2",
     "ts-loader": "^9.5.1",
-    "tslint": "^5.8.0",
-    "typescript": "^5.2.2",
-    "vsce": "^2.15.0",
-    "vscode-nls-dev": "^3.3.1",
-    "webpack": "^5.89.0",
+    "tslint": "^5.20.1",
+    "typescript": "^5.4.5",
+    "@vscode/vsce": "^2.26.1",
+    "vscode-nls-dev": "^4.0.4",
+    "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
-  }
+  },
+  "overrides": {
+    "parse-link-header": "^2.0.0"
+  },
+  "packageManager": "npm@10.8.0+sha512.c21f77b91733829ec70e73cc88b5dc0a4bf685a81d252d3327d293ff7d5dd05a173f4dbeaa037600ec29696f397f14569229e5dab10b7cfc3e0a30575b8f3f8d"
 }
