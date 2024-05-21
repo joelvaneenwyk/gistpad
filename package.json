@@ -2,6 +2,7 @@
   "name": "gistfs",
   "displayName": "GistPad",
   "description": "Manage your code snippets and developer notes using GitHub Gists and repositories.",
+  "packageManager": "yarn@4.2.2+sha256.1aa43a5304405be7a7cb9cb5de7b97de9c4e8ddd3273e4dad00d6ae3eb39f0ef",
   "publisher": "vsls-contrib",
   "version": "0.6.0",
   "extensionKind": [
@@ -11,16 +12,29 @@
   "icon": "images/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lostintangent/gistpad"
+    "url": "https://github.com/joelvaneenwyk/gistpad"
   },
   "bugs": {
-    "url": "https://github.com/lostintangent/gistpad/issues"
+    "url": "https://github.com/joelvaneenwyk/gistpad/issues"
   },
-  "homepage": "https://github.com/lostintangent/gistpad#readme",
+  "homepage": "https://github.com/joelvaneenwyk/gistpad#readme",
   "license": "MIT",
   "engines": {
-    "vscode": "^2.26.1"
+    "vscode": "^2.26.1",
+    "node": "^20 | ^21 | ^22",
+    "yarn": "^4"
   },
+  "main": "./dist/extension.js",
+  "browser": "./dist/extension-web.js",
+  "scripts": {
+    "compile": "tsc -p ./",
+    "package": "vsce package",
+    "vscode:prepublish": "webpack",
+    "watch": "webpack --mode development --watch --progress"
+  },
+  "workspaces": [
+    "workspaces/*"
+  ],
   "categories": [
     "Other"
   ],
@@ -37,8 +51,53 @@
     "onStartupFinished",
     "onUri"
   ],
-  "main": "./dist/extension.js",
-  "browser": "./dist/extension-web.js",
+  "overrides": {
+    "parse-link-header": "^2.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.3.0",
+    "eslint": "9.x",
+    "globals": "^15.3.0",
+    "typescript-eslint": "^7.10.0"
+  },
+  "dependencies": {
+    "@types/moment": "^2.13.0",
+    "@types/node": "^20.12.12",
+    "@types/vscode": "^1.89.0",
+    "@vscode/vsce": "^2.26.1",
+    "@yarnpkg/cli": "^4.2.2",
+    "@yarnpkg/core": "^4.0.5",
+    "@yarnpkg/plugin-git": "^3.0.0",
+    "@yarnpkg/plugin-workspace-tools": "^4.1.0",
+    "axios": "^1.7.2",
+    "base64-to-uint8array": "^1.0.0",
+    "copy-webpack-plugin": "^12.0.2",
+    "corepack": "^0.28.1",
+    "diff-match-patch": "^1.0.5",
+    "gists": "workspace:*",
+    "github-base": "^1.0.0",
+    "https-browserify": "^1.0.0",
+    "is-binary-path": "^3.0.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-regex": "^0.2.0",
+    "mobx": "^6.12.3",
+    "moment": "^2.30.1",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "querystring-es3": "^0.2.1",
+    "rxjs": "^7.8.1",
+    "simple-git": "^3.24.0",
+    "stream-http": "^3.2.0",
+    "title-case": "^4.3.1",
+    "ts-loader": "^9.5.1",
+    "tslint": "^5.20.1",
+    "typescript": "^5.4.5",
+    "url": "^0.11.3",
+    "util": "^0.12.5",
+    "vscode-nls-dev": "^4.0.4",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
   "contributes": {
     "configuration": {
       "type": "object",
@@ -1492,58 +1551,5 @@
       "supported": true
     },
     "virtualWorkspaces": true
-  },
-  "scripts": {
-    "compile": "tsc -p ./",
-    "package": "vsce package",
-    "vscode:prepublish": "webpack",
-    "watch": "webpack --mode development --watch --progress"
-  },
-  "workspaces": [
-    "workspaces/*"
-  ],
-  "dependencies": {
-    "@types/moment": "^2.13.0",
-    "@types/node": "^20.12.12",
-    "@types/vscode": "^1.89.0",
-    "@vscode/vsce": "^2.26.1",
-    "axios": "^1.7.2",
-    "base64-to-uint8array": "^1.0.0",
-    "copy-webpack-plugin": "^12.0.2",
-    "corepack": "^0.28.1",
-    "diff-match-patch": "^1.0.5",
-    "gists": "workspace:*",
-    "github-base": "^1.0.0",
-    "https-browserify": "^1.0.0",
-    "is-binary-path": "^3.0.0",
-    "markdown-it": "^14.1.0",
-    "markdown-it-regex": "^0.2.0",
-    "mobx": "^6.12.3",
-    "moment": "^2.30.1",
-    "os-browserify": "^0.3.0",
-    "path-browserify": "^1.0.1",
-    "querystring-es3": "^0.2.1",
-    "rxjs": "^7.8.1",
-    "simple-git": "^3.24.0",
-    "stream-http": "^3.2.0",
-    "title-case": "^4.3.1",
-    "ts-loader": "^9.5.1",
-    "tslint": "^5.20.1",
-    "typescript": "^5.4.5",
-    "url": "^0.11.3",
-    "util": "^0.12.5",
-    "vscode-nls-dev": "^4.0.4",
-    "webpack": "^5.91.0",
-    "webpack-cli": "^5.1.4"
-  },
-  "overrides": {
-    "parse-link-header": "^2.0.0"
-  },
-  "packageManager": "yarn@4.2.2+sha256.1aa43a5304405be7a7cb9cb5de7b97de9c4e8ddd3273e4dad00d6ae3eb39f0ef",
-  "devDependencies": {
-    "@eslint/js": "^9.3.0",
-    "eslint": "9.x",
-    "globals": "^15.3.0",
-    "typescript-eslint": "^7.10.0"
   }
 }
