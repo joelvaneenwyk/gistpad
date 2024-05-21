@@ -1,5 +1,5 @@
-const path = require("path");
-const CopyPlugin = require("copy-webpack-plugin");
+import { resolve as _resolve, join } from "path";
+import CopyPlugin from "copy-webpack-plugin";
 
 const config = {
   mode: "production",
@@ -33,7 +33,7 @@ const nodeConfig = {
   ...config,
   target: "node",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: _resolve(__dirname, "dist"),
     filename: "extension.js",
     libraryTarget: "commonjs2",
     devtoolModuleFilenameTemplate: "../[resource-path]",
@@ -41,17 +41,17 @@ const nodeConfig = {
   resolve: {
     ...config.resolve,
     alias: {
-      "@abstractions": path.join(__dirname, "./src/abstractions/node")
+      "@abstractions": join(__dirname, "./src/abstractions/node")
     }
   },
   plugins: [
     new CopyPlugin([
       {
-        from: path.resolve(
+        from: _resolve(
           __dirname,
           "./src/abstractions/node/images/scripts/*"
         ),
-        to: path.resolve(__dirname, "./dist/scripts/"),
+        to: _resolve(__dirname, "./dist/scripts/"),
         flatten: true
       }
     ])
@@ -62,7 +62,7 @@ const webConfig = {
   ...config,
   target: "webworker",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: _resolve(__dirname, "dist"),
     filename: "extension-web.js",
     libraryTarget: "commonjs2",
     devtoolModuleFilenameTemplate: "../[resource-path]",
@@ -70,7 +70,7 @@ const webConfig = {
   resolve: {
     ...config.resolve,
     alias: {
-      "@abstractions": path.join(__dirname, "./src/abstractions/browser")
+      "@abstractions": join(__dirname, "./src/abstractions/browser")
     },
     fallback: {
       "child_process": false,
@@ -90,4 +90,4 @@ const webConfig = {
 };
 
 
-module.exports = [nodeConfig, webConfig];
+export default [nodeConfig, webConfig];
