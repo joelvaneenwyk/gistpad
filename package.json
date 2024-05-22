@@ -28,6 +28,8 @@
   "browser": "./dist/extension-web.js",
   "scripts": {
     "compile": "tsc -p ./",
+    "build": "webpack --mode development",
+    "lint": "eslint \"**/*\"",
     "package": "vsce package",
     "vscode:prepublish": "webpack",
     "watch": "webpack --mode development --watch --progress"
@@ -64,6 +66,7 @@
     "@types/moment": "^2.13.0",
     "@types/node": "^20.12.12",
     "@types/vscode": "^1.89.0",
+    "@types/webpack": "^5.28.5",
     "@vscode/vsce": "^2.26.1",
     "@yarnpkg/cli": "^4.2.2",
     "@yarnpkg/core": "^4.0.5",
@@ -90,6 +93,7 @@
     "stream-http": "^3.2.0",
     "title-case": "^4.3.1",
     "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
     "tslint": "^5.20.1",
     "typescript": "^5.4.5",
     "url": "^0.11.3",

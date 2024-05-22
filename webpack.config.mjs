@@ -1,6 +1,11 @@
-import { resolve as _resolve, join } from "path";
-import CopyPlugin from "copy-webpack-plugin";
+// @ts-check
 
+import { resolve as _resolve, dirname, join } from "path";
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+/** @type { import('webpack').Configuration } */
 const config = {
   mode: "production",
   entry: "./src/extension.ts",
@@ -8,12 +13,12 @@ const config = {
     vscode: "commonjs vscode"
   },
   resolve: {
-    extensions: [".ts", ".js", ".json"]
+    extensions: [".ts", ".mjs", ".js", ".json"]
   },
-  node: {
-    __filename: false,
-    __dirname: false
-  },
+  // node: {
+  //   __filename: false,
+  //   __dirname: false
+  // },
   module: {
     rules: [
       {
@@ -44,18 +49,18 @@ const nodeConfig = {
       "@abstractions": join(__dirname, "./src/abstractions/node")
     }
   },
-  plugins: [
-    new CopyPlugin([
-      {
-        from: _resolve(
-          __dirname,
-          "./src/abstractions/node/images/scripts/*"
-        ),
-        to: _resolve(__dirname, "./dist/scripts/"),
-        flatten: true
-      }
-    ])
-  ]
+  //plugins: [
+  //  new CopyPlugin([
+  //    {
+  //      from: _resolve(
+  //        __dirname,
+  //        "./src/abstractions/node/images/scripts/*"
+  //      ),
+  //      to: _resolve(__dirname, "./dist/scripts/"),
+  //      // flatten: true
+  //    }
+  //  ])
+  //]
 };
 
 const webConfig = {
