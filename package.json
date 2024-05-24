@@ -27,6 +27,8 @@
   "main": "./dist/extension.js",
   "browser": "./dist/extension-web.js",
   "scripts": {
+    "preinstall": "git submodule update --init --recursive",
+    "postinstall": "yarn sdks",
     "compile": "tsc -p ./",
     "build": "webpack --mode development",
     "lint": "eslint \"**/*\"",
@@ -56,13 +58,11 @@
   "overrides": {
     "parse-link-header": "^2.0.0"
   },
-  "devDependencies": {
-    "@eslint/js": "^9.3.0",
-    "eslint": "9.x",
-    "globals": "^15.3.0",
-    "typescript-eslint": "^7.10.0"
+  "peerDependencies": {
+    "eslint": "*"
   },
   "dependencies": {
+    "@eslint/js": "^9.3.0",
     "@types/moment": "^2.13.0",
     "@types/node": "^20.12.12",
     "@types/vscode": "^1.89.0",
@@ -72,13 +72,18 @@
     "@yarnpkg/core": "^4.0.5",
     "@yarnpkg/plugin-git": "^3.0.0",
     "@yarnpkg/plugin-workspace-tools": "^4.1.0",
+    "@yarnpkg/sdks": "^3.1.2",
     "axios": "^1.7.2",
     "base64-to-uint8array": "^1.0.0",
+    "buffer": "^6.0.3",
     "copy-webpack-plugin": "^12.0.2",
     "corepack": "^0.28.1",
     "diff-match-patch": "^1.0.5",
+    "eslint": "9.x",
+    "events": "^3.3.0",
     "gists": "workspace:*",
     "github-base": "^1.0.0",
+    "globals": "^15.3.0",
     "https-browserify": "^1.0.0",
     "is-binary-path": "^3.0.0",
     "markdown-it": "^14.1.0",
@@ -91,16 +96,24 @@
     "rxjs": "^7.8.1",
     "simple-git": "^3.24.0",
     "stream-http": "^3.2.0",
+    "string_decoder": "^1.3.0",
     "title-case": "^4.3.1",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "tslint": "^5.20.1",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^7.10.0",
     "url": "^0.11.3",
     "util": "^0.12.5",
     "vscode-nls-dev": "^4.0.4",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
   },
   "contributes": {
     "configuration": {
@@ -1550,10 +1563,7 @@
     ],
     "markdown.markdownItPlugins": true
   },
-  "capabilities": {
-    "untrustedWorkspaces": {
-      "supported": true
-    },
-    "virtualWorkspaces": true
+  "devDependencies": {
+    "@types/events": "^3"
   }
 }

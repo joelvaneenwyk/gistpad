@@ -1,9 +1,13 @@
 // @ts-check
 
+import { createRequire } from 'module';
 import { resolve as _resolve, dirname, join } from "path";
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const require = createRequire(import.meta.url);
+
+const CopyPlugin = require("copy-webpack-plugin");
 
 /** @type { import('webpack').Configuration } */
 const config = {
@@ -13,12 +17,25 @@ const config = {
     vscode: "commonjs vscode"
   },
   resolve: {
+    fallback: {
+      "string_decoder": require.resolve("string_decoder/"),
+      "buffer": require.resolve("buffer/"),
+      "child_process": false,
+      "crypto": false,
+      "fs": false,
+      "events": require.resolve("events/"),
+      "http": require.resolve("stream-http"),
+      "https": require.resolve("https-browserify"),
+      "os": require.resolve("os-browserify/browser"),
+      "path": require.resolve("path-browserify"),
+      "querystring": require.resolve("querystring-es3"),
+      "stream": false,
+      "url": require.resolve("url/"),
+      "util": require.resolve("util/"),
+      "zlib": false
+    },
     extensions: [".ts", ".mjs", ".js", ".json"]
   },
-  // node: {
-  //   __filename: false,
-  //   __dirname: false
-  // },
   module: {
     rules: [
       {
@@ -49,18 +66,19 @@ const nodeConfig = {
       "@abstractions": join(__dirname, "./src/abstractions/node")
     }
   },
-  //plugins: [
-  //  new CopyPlugin([
-  //    {
-  //      from: _resolve(
-  //        __dirname,
-  //        "./src/abstractions/node/images/scripts/*"
-  //      ),
-  //      to: _resolve(__dirname, "./dist/scripts/"),
-  //      // flatten: true
-  //    }
-  //  ])
-  //]
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: _resolve(
+            __dirname,
+            "./src/abstractions/node/images/scripts/*"
+          ),
+          to: _resolve(__dirname, "./dist/scripts/"),
+        }
+      ],
+    })
+  ]
 };
 
 const webConfig = {
@@ -77,22 +95,7 @@ const webConfig = {
     alias: {
       "@abstractions": join(__dirname, "./src/abstractions/browser")
     },
-    fallback: {
-      "child_process": false,
-      "crypto": false,
-      "fs": false, // TODO: Implement file uploading in the browser
-      "http": require.resolve("stream-http"),
-      "https": require.resolve("https-browserify"),
-      "os": require.resolve("os-browserify/browser"),
-      "path": require.resolve("path-browserify"),
-      "querystring": require.resolve("querystring-es3"),
-      "stream": false,
-      "url": require.resolve("url/"),
-      "util": require.resolve("util/"),
-      "zlib": false
-    }
   }
 };
-
 
 export default [nodeConfig, webConfig];
