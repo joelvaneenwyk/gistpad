@@ -4,7 +4,7 @@ import * as path from "path";
 import { store } from "../store";
 import { refreshGist } from "../store/actions";
 import { getToken } from "../store/auth";
-import { simpleGit, SimpleGit, SimpleGitOptions } from 'simple-git';
+import { simpleGit, SimpleGit } from 'simple-git';
 
 async function ensureRepo(gistId: string): Promise<[string, SimpleGit]> {
   const repoPath = path.join(os.tmpdir(), gistId);
@@ -12,7 +12,7 @@ async function ensureRepo(gistId: string): Promise<[string, SimpleGit]> {
 
   let repo;
   if (repoExists) {
-    repo = git(repoPath);
+    repo = simpleGit(repoPath);
     const isRepo = await repo.checkIsRepo();
     if (isRepo) {
       await repo.pull("origin", "master", { "--force": null });
@@ -22,11 +22,11 @@ async function ensureRepo(gistId: string): Promise<[string, SimpleGit]> {
   } else {
     const token = await getToken();
     const remote = `https://${store.login}:${token}@gist.github.com/${gistId}.git`;
-    await git(os.tmpdir()).silent(true).clone(remote);
+    await simpleGit(os.tmpdir()).silent(true).clone(remote);
 
     // Reset the git instance to point
     // at the newly cloned folder.
-    repo = git(repoPath);
+    repo = simpleGit(repoPath);
   }
 
   return [repoPath, repo];

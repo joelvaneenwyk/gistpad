@@ -403,7 +403,7 @@ export async function refreshRepositories() {
   }
 
   if (refreshTimer) {
-    clearInterval(refreshTimer);
+    clearInterval(Number(refreshTimer));
   }
 
   store.repos = await Promise.all(
