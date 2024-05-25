@@ -1,0 +1,4 @@
+[submodule "workspaces/gists"]
+	path = workspaces/gists
+	url = https://github.com/joelvaneenwyk/gists.git
+	branch = develop

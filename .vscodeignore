@@ -2,7 +2,7 @@
 .github/**
 src/**
 .gitignore
-**/webpack.config.js
+**/webpack.config.mjs
 **/tsconfig.json
 **/tslint.json
 **/prettierrc.json

@@ -40,7 +40,7 @@ export class Output {
     this._outputChannel.show();
   }
 
-  public dispose() { 
+  public dispose() {
     this._outputChannel.dispose();
   }
 }

@@ -1,4 +1,11 @@
-node_modules
-dist
+node_modules/
+dist/
+out/
+.build/
+
+.pnp.cjs
+.pnp.loader.mjs
+
 *.vsix
 .DS_Store
+yarn.lock

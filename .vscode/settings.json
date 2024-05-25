@@ -1,13 +1,25 @@
 {
+  "[typescript][javascript]": {},
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.fixAll": true
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
   },
   "editor.formatOnSave": true,
   "files.exclude": {
     "out": false
   },
   "search.exclude": {
-    "out": true
-  }
+    "out": true,
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "eslint.nodePath": ".yarn/sdks",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "npm.packageManager": "yarn",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "cSpell.words": [
+    "gistfs",
+    "unstar",
+    "Unstar"
+  ]
 }

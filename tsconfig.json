@@ -1,18 +1,29 @@
 {
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules"
+  ],
   "compilerOptions": {
     "module": "commonjs",
     "target": "ES2019",
-    "outDir": "out",
-    "lib": ["ES2019", "DOM"],
+    "outDir": ".build",
+    "lib": [
+      "ES2019",
+      "DOM"
+    ],
     "sourceMap": true,
     "rootDir": "src",
     "strict": true,
     "noUnusedLocals": true,
     "baseUrl": ".",
     "paths": {
-      "@abstractions/*": ["src/abstractions/node/*"]
+      "@abstractions/*": [
+        "src/abstractions/node/*"
+      ]
     },
     "experimentalDecorators": true
-  }
+  },
+  "include": [
+    "src/**/*.ts",
+    "webpack.config.mjs"
+  ]
 }
