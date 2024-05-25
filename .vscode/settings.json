@@ -15,6 +15,7 @@
   },
   "eslint.nodePath": ".yarn/sdks",
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "npm.packageManager": "yarn",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "cSpell.words": [
     "gistfs",
