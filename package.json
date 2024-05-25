@@ -430,7 +430,7 @@
       },
       {
         "command": "gistpad.openGistInBlocks",
-        "title": "View Gist in Bl.ocks"
+        "title": "View Gist in Blocks"
       },
       {
         "command": "gistpad.openGistInNbViewer",

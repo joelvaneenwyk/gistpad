@@ -1,5 +1,7 @@
 # Changelog
 
+<!-- markdownlint-disable MD033 MD045 -->
+
 ## v0.6.1 (11/19/2023)
 
 - Changed the default gist type to secret, by making the `+` icon in the tree create a new secret gist (as opposed to a public gist)
@@ -208,7 +210,7 @@
 
 - Introduced support for "playground config", which allows you to define a `config.json` file within a playground/tutorial that will be automatically loaded and exposed via a global `window.config` variable.
 - Introduced support for "playground input", which allows you to accept user input and run a custom rubric against it, in order to allow user's to "complete" a playground/tutorial.
-- Introduced support for a "playgroud canvas", which allows you to specify a custom playground experience, using an HTML file that isn't automatically displayed to the end-user.
+- Introduced support for a "playground canvas", which allows you to specify a custom playground experience, using an HTML file that isn't automatically displayed to the end-user.
 - When duplicating a directory, you're now asked to specify the name of the new directory before it's created. This prevents you from needing to duplicate and then rename the directory, and therefore, enables the same thing in a single gesture.
 
 ## v0.0.63 (03/15/2020)
