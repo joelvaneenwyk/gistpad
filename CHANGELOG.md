@@ -1,3 +1,5 @@
+# Changelog
+
 ## v0.6.1 (11/19/2023)
 
 - Changed the default gist type to secret, by making the `+` icon in the tree create a new secret gist (as opposed to a public gist)

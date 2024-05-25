@@ -1,6 +1,6 @@
 import globals from "globals";
 import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
+import pluginTypescript from "typescript-eslint";
 
 /** @type { import("eslint").Linter.FlatConfig[] } */
 export default [
@@ -10,5 +10,5 @@ export default [
     }
   },
   pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
+  ...pluginTypescript.configs.recommended,
 ];
