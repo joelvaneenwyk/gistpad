@@ -4,6 +4,7 @@ import {
   commands,
   ExtensionContext,
   extensions,
+  IconPath,
   ProgressLocation,
   TextDocument,
   Uri,
@@ -373,20 +374,18 @@ export function isTutorialGist(gist: Gist) {
 }
 
 export function joinPath(context: ExtensionContext, fragment: string) {
-  let uri: string | Uri;
+  let uri: Uri;
 
-  // @ts-ignore
   if (context.extensionUri) {
-    // @ts-ignore
     uri = Uri.joinPath(context.extensionUri, fragment);
   } else {
-    uri = path.join(context.extensionPath, fragment);
+    uri = Uri.file(path.join(context.extensionPath, fragment));
   }
 
   return uri;
 }
 
-export function getIconPath(context: ExtensionContext, iconName: string) {
+export function getIconPath(context: ExtensionContext, iconName: string): IconPath {
   return {
     dark: joinPath(context, `images/dark/${iconName}`),
     light: joinPath(context, `images/light/${iconName}`)

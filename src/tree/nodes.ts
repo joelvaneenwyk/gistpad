@@ -1,6 +1,7 @@
 import * as moment from "moment";
 import {
   ExtensionContext,
+  IconPath,
   ThemeIcon,
   TreeItem,
   TreeItemCollapsibleState,
@@ -40,7 +41,7 @@ export class TreeNode extends TreeItem {
     gistType: GistGroupType,
     isPublic: boolean,
     context: ExtensionContext
-  ) => {
+  ): IconPath => {
     let iconName = gistType;
 
     if (!isPublic) {
@@ -54,9 +55,12 @@ export class TreeNode extends TreeItem {
     gistType: GistGroupType,
     isPublic: boolean,
     context: ExtensionContext
-  ) => {
+  ): IconPath => {
     if (!config.get("treeIcons")) {
-      return;
+      return {
+        light: Uri.parse(""),
+        dark: Uri.parse("")
+      };
     }
 
     return this.getIconPath(gistType, isPublic, context);
@@ -106,11 +110,14 @@ export class GistNode extends TreeNode {
     this.description = getGistDescription(gist, !config.get("treeIcons"));
 
     if (showIcon) {
-      this.iconPath = this.getGistTypeIcon(
+      const gistTypeIcon = this.getGistTypeIcon(
         gist.type!,
         gist.public,
         extensionContext
       );
+      if (gistTypeIcon) {
+        this.iconPath = gistTypeIcon;
+      }
     }
 
     this.tooltip = this.getTooltip(
