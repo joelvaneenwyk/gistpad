@@ -1,14 +1,14 @@
-import * as fs from "fs";
-import * as os from "os";
-import * as path from "path";
-import * as git from "simple-git/promise";
+import { existsSync, writeFileSync, renameSync } from "fs";
+import { join } from "path";
+import { simpleGit as git, SimpleGit } from 'simple-git';
+import { tmpdir } from "os";
 import { store } from "../store";
 import { refreshGist } from "../store/actions";
 import { getToken } from "../store/auth";
 
-async function ensureRepo(gistId: string): Promise<[string, git.SimpleGit]> {
-  const repoPath = path.join(os.tmpdir(), gistId);
-  const repoExists = fs.existsSync(repoPath);
+async function ensureRepo(gistId: string): Promise<[string, SimpleGit]> {
+  const repoPath = join(tmpdir(), gistId);
+  const repoExists = existsSync(repoPath);
 
   let repo;
   if (repoExists) {
@@ -22,7 +22,7 @@ async function ensureRepo(gistId: string): Promise<[string, git.SimpleGit]> {
   } else {
     const token = await getToken();
     const remote = `https://${store.login}:${token}@gist.github.com/${gistId}.git`;
-    await git(os.tmpdir()).silent(true).clone(remote);
+    await git(tmpdir()).silent(true).clone(remote);
 
     // Reset the git instance to point
     // at the newly cloned folder.
@@ -38,9 +38,9 @@ export async function addFile(
   content: Uint8Array
 ) {
   const [repoPath, repo] = await ensureRepo(gistId);
-  const filePath = path.join(repoPath, fileName);
+  const filePath = join(repoPath, fileName);
 
-  fs.writeFileSync(filePath, content);
+  writeFileSync(filePath, content);
 
   await repo.add(filePath);
   await repo.commit(`Adding ${fileName}`);
@@ -56,9 +56,9 @@ export async function renameFile(
 ) {
   const [repoPath, repo] = await ensureRepo(gistId);
 
-  const filePath = path.join(repoPath, fileName);
-  const newFilePath = path.join(repoPath, newFileName);
-  fs.renameSync(filePath, newFilePath);
+  const filePath = join(repoPath, fileName);
+  const newFilePath = join(repoPath, newFileName);
+  renameSync(filePath, newFilePath);
 
   await repo.add([filePath, newFilePath]);
   await repo.commit(`Renaming ${fileName} to ${newFileName}`);
@@ -93,7 +93,7 @@ export async function duplicateGist(
 }
 
 async function pushRemote(
-  repo: git.SimpleGit,
+  repo: SimpleGit,
   remoteName: string,
   remoteUrl: string
 ) {
