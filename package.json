@@ -44,7 +44,11 @@
   "scripts": {
     "build": "webpack --mode production",
     "compile": "tsc -p ./",
-    "test": "vscode-test --watch 'out/**/*.js'",
+    "test": "vscode-test --jobs 31 --parallel --full-trace",
+    "test:watch": "vscode-test --watch \"out/**/*.js\"",
+    "start": "npm run start:install && npm run start:run",
+    "start:install": "code --new-window --extensions-dir .build --install-extension gistfs-0.6.0.vsix --verbose",
+    "start:run": "code --new-window --extensions-dir .build --verbose",
     "package": "vsce package",
     "publish": "vsce publish",
     "vscode:prepublish": "webpack",
