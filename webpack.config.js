@@ -1,6 +1,7 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 
+/** @type {import("webpack").Options} */
 const config = {
   mode: "production",
   entry: "./src/extension.ts",
@@ -29,6 +30,7 @@ const config = {
   }
 };
 
+/** @type {import("webpack").Options} */
 const nodeConfig = {
   ...config,
   target: "node",
@@ -45,19 +47,22 @@ const nodeConfig = {
     }
   },
   plugins: [
-    new CopyPlugin([
-      {
-        from: path.resolve(
-          __dirname,
-          "./src/abstractions/node/images/scripts/*"
-        ),
-        to: path.resolve(__dirname, "./dist/scripts/"),
-        flatten: true
-      }
-    ])
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(
+            __dirname,
+            "src/abstractions/node/images/scripts/"
+          ),
+          to: path.resolve(__dirname, "./dist/scripts/"),
+          //flatten: true
+        },
+      ],
+    })
   ]
 };
 
+/** @type {import("webpack").Options} */
 const webConfig = {
   ...config,
   target: "webworker",
@@ -67,6 +72,11 @@ const webConfig = {
     libraryTarget: "commonjs2",
     devtoolModuleFilenameTemplate: "../[resource-path]",
   },
+  externals: {
+    'node:events': 'commonjs2 node:events',
+    'node:path': 'commonjs2 node:path',
+    'vscode': "commonjs2 vscode"
+  },
   resolve: {
     ...config.resolve,
     alias: {
@@ -75,10 +85,13 @@ const webConfig = {
     fallback: {
       "child_process": false,
       "crypto": false,
-      "fs": false, // TODO: Implement file uploading in the browser
+      // TODO: Implement file uploading in the browser
+      "fs": false,
+      "events": false,
       "http": require.resolve("stream-http"),
       "https": require.resolve("https-browserify"),
       "os": require.resolve("os-browserify/browser"),
+      "node:path": require.resolve("path-browserify"),
       "path": require.resolve("path-browserify"),
       "querystring": require.resolve("querystring-es3"),
       "stream": false,
