@@ -55,6 +55,10 @@
     "watch": "webpack --mode development --watch --progress",
     "lint": "eslint ."
   },
+  "prettier": {
+    "bracketSpacing": true,
+    "trailingComma": "none"
+  },
   "dependencies": {
     "axios": "^1.7.9",
     "base64-to-uint8array": "^1.0.0",
