@@ -7,3 +7,4 @@ out/
 *.vsix
 .DS_Store
 pnpm-lock.yaml
+*.tgz
