@@ -1,4 +1,5 @@
 import { getApi } from "../../store/actions";
+import * as GitHub from "github-base";
 
 export async function createRepoComment(
   repo: string,
@@ -6,7 +7,6 @@ export async function createRepoComment(
   body: string,
   line: number
 ) {
-  const GitHub = require("github-base");
   const api = await getApi(GitHub);
 
   const response = await api.post(`/repos/${repo}/commits/HEAD/comments`, {
@@ -18,7 +18,6 @@ export async function createRepoComment(
 }
 
 export async function editRepoComment(repo: string, id: string, body: string) {
-  const GitHub = require("github-base");
   const api = await getApi(GitHub);
 
   return api.patch(`/repos/${repo}/comments/${id}`, {
@@ -27,14 +26,12 @@ export async function editRepoComment(repo: string, id: string, body: string) {
 }
 
 export async function deleteRepoComment(repo: string, id: string) {
-  const GitHub = require("github-base");
   const api = await getApi(GitHub);
 
   return api.delete(`/repos/${repo}/comments/${id}`);
 }
 
 export async function getRepoComments(repo: string) {
-  const GitHub = require("github-base");
   const api = await getApi(GitHub);
 
   const response = await api.get(`/repos/${repo}/comments`);
