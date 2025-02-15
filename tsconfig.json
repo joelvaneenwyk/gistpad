@@ -1,19 +1,30 @@
 {
-  "exclude": ["node_modules"],
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "exclude": [
+    "node_modules/mobx/dist/types/observableset.d.ts"
+  ],
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
     "module": "commonjs",
     "target": "ES2019",
     "outDir": "out",
-    "lib": ["ES2019", "DOM"],
+    "lib": [
+      "DOM",
+      "ESNext",
+      "ESNext.Collection"
+    ],
     "sourceMap": true,
     "rootDir": "src",
     "strict": true,
     "noUnusedLocals": true,
     "baseUrl": ".",
-    "types": ["vscode"],
+    "types": [
+      "vscode"
+    ],
     "paths": {
-      "@abstractions/*": ["src/abstractions/node/*"]
+      "@abstractions/*": [
+        "src/abstractions/node/*"
+      ]
     },
     "experimentalDecorators": true
   }
