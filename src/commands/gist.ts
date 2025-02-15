@@ -50,7 +50,7 @@ import {
   updateGistTags,
   withProgress
 } from "../utils";
-const isBinaryPath = require("is-binary-path");
+import isBinaryPath from "is-binary-path";
 
 const GIST_NAME_PATTERN = /(\/)?(?<owner>([a-z\d]+-)*[a-z\d]+)\/(?<id>[^\/]+)$/i;
 

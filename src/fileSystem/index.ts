@@ -35,7 +35,7 @@ import {
 } from "../utils";
 import { getFileContents, updateGistFiles } from "./api";
 import * as gitFS from "./git";
-const isBinaryPath = require("is-binary-path");
+import isBinaryPath from "is-binary-path";
 
 interface WriteOperation {
   gistId: string;
@@ -184,7 +184,7 @@ export class GistFileSystemProvider implements FileSystemProvider {
     const file = await this.getFileFromUri(uri);
     let contents = await getFileContents(file);
 
-    if (isBinaryPath(file.filename)) {
+    if (!file.filename || isBinaryPath(file.filename)) {
       return <any>contents;
     } else {
       if (contents.trim() === ZERO_WIDTH_SPACE) {

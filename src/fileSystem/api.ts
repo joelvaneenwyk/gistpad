@@ -4,7 +4,7 @@ import { ZERO_WIDTH_SPACE } from "../constants";
 import { Gist, GistFile, store } from "../store";
 import { getApi } from "../store/actions";
 
-const isBinaryPath = require("is-binary-path");
+import isBinaryPath from "is-binary-path";
 export async function getFileContents(file: GistFile) {
   if (file.truncated || !file.content) {
     const responseType = isBinaryPath(file.filename!) ? "arraybuffer" : "text";
