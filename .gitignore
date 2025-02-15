@@ -3,5 +3,7 @@ dist/
 out/
 .vscode-test/
 .build/
+.yarn/
 *.vsix
 .DS_Store
+pnpm-lock.yaml
